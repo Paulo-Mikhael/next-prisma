@@ -1,0 +1,13 @@
+.avatar{
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  
+  li{
+    margin-right: 8px;
+    color: #888888;
+    font-weight: 600;
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,23 @@
+.postsContainer {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.paginationContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  a {
+    font-weight: 400;
+    font-size: 18px;
+    color: #BFFFC3;
+    margin-right: 20px;
+
+    &:hover{
+      color: #81FE88;
+    }
+  }
+}
