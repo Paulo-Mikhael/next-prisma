@@ -4,18 +4,28 @@ import logger from "@/logger";
 import Link from "next/link";
 import db from "../../prisma/db";
 
-async function getAllPosts(page) {
+async function getAllPosts(page, searchTerm) {
   try {
-    const perPage = 6;
+    const where = {};
+
+    if (searchTerm) {
+      where.title = {
+        contains: searchTerm,
+        mode: "insensitive",
+      };
+    }
+
+    const perPage = 2;
     const skip = (page - 1) * perPage;
     const prev = page > 1 ? page - 1 : null;
-    const totalItems = await db.post.count();
+    const totalItems = await db.post.count({ where });
     const totalPages = Math.ceil(totalItems / perPage);
     const next = page < totalPages ? page + 1 : null;
 
     const posts = await db.post.findMany({
       skip,
       take: perPage,
+      where,
       orderBy: {
         createdAt: "desc",
       },
@@ -33,7 +43,12 @@ async function getAllPosts(page) {
 
 export default async function Home({ searchParams }) {
   const currentPage = parseInt(searchParams?.page || 1);
-  const { data: posts, prev, next } = await getAllPosts(currentPage);
+  const searchTerm = searchParams?.q;
+  const {
+    data: posts,
+    prev,
+    next,
+  } = await getAllPosts(currentPage, searchTerm);
 
   return (
     <main className={styles.postsContainer}>
@@ -41,8 +56,16 @@ export default async function Home({ searchParams }) {
         <CardPost key={post.id} post={post} />
       ))}
       <div className={styles.paginationContainer}>
-        {prev && <Link href={`/?page=${prev}`}>Página Anterior</Link>}
-        {next && <Link href={`/?page=${next}`}>Próxima Página</Link>}
+        {prev && (
+          <Link href={{ pathname: "/", query: { page: prev, q: searchTerm } }}>
+            Página Anterior
+          </Link>
+        )}
+        {next && (
+          <Link href={{ pathname: "/", query: { page: next, q: searchTerm } }}>
+            Página Anterior
+          </Link>
+        )}
       </div>
     </main>
   );

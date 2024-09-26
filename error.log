@@ -1,2 +1,22 @@
 {"level":"error","message":"Falha ao obter post com o slug \"introducao-ao-reactaaaaaaaaa\". Erro: TypeError: Cannot read properties of null (reading 'markdown')"}
 {"level":"error","message":"Falha ao obter post com o slug \"introducao-ao-reactaa\". Erro: TypeError: Cannot read properties of null (reading 'markdown')"}
+{"clientVersion":"5.20.0","code":"P2037","level":"error","meta":{"message":"FATAL: sorry, too many clients already","modelName":"Post"},"name":"PrismaClientKnownRequestError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
+{"clientVersion":"5.20.0","level":"error","name":"PrismaClientInitializationError"}
