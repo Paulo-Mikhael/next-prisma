@@ -1,11 +1,12 @@
 import { Aside } from "@/components/Aside";
 import { Prompt } from "next/font/google";
 import "./globals.scss";
+import Form from "@/components/Form";
 
 const prompt = Prompt({
   weight: ["400", "600"],
   subsets: ["latin"],
-  display: "swap"
+  display: "swap",
 });
 
 export const metadata = {
@@ -19,7 +20,10 @@ export default function RootLayout({ children }) {
       <body>
         <div className="app-container">
           <Aside />
-          {children}
+          <div className="app-children-container">
+            <Form />
+            {children}
+          </div>
         </div>
       </body>
     </html>

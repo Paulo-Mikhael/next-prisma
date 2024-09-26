@@ -5,7 +5,7 @@ export default function NotFound() {
     <InfoPage
       infoMessage="OPS! Página não encontrada."
       infoSubMessage="Você pode voltar ao feed e continuar buscando projetos incríveis!"
-      infoImageUrl="/500.png"
+      infoImageUrl="/404.png"
     />
   );
 }
