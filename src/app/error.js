@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect } from "react";
-import style from "./error.module.scss";
-import { ArrowBack } from "@/components/ArrowBack";
+import InfoPage from "@/components/InfoPage";
 
 export default function Error({ error }) {
   useEffect(() => {
@@ -11,18 +9,10 @@ export default function Error({ error }) {
   }, [error]);
 
   return (
-    <div className={style.errorContainer}>
-      <Image width={656} height={367} src="/500.png" />
-      <h2 className={style.errorMessage}>Opa! Um erro ocorreu.</h2>
-      <p className={style.errorSubMessage}>
-        Não conseguimos carregar a página, volte para seguir navegando.
-      </p>
-      <div className={style.errorLinkContainer}>
-        <a className={style.errorLink} href="">
-          Voltar ao feed
-        </a>
-        <ArrowBack />
-      </div>
-    </div>
+    <InfoPage
+      infoMessage="Opa! Um erro ocorreu."
+      infoSubMessage="Não conseguimos carregar a página, volte para seguir navegando."
+      infoImageUrl="/500.png"
+    />
   );
 }

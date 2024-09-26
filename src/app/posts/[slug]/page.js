@@ -4,33 +4,31 @@ import html from "remark-html";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import { Avatar } from "@/components/Avatar";
+import db from "../../../../prisma/db";
+import { redirect } from "next/navigation";
 
 async function getPostBySlug(slug) {
-  const response = await fetch(`http://localhost:3042/posts?slug=${slug}`)
-  const date = new Date()
-  const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  try {
+    const post = await db.post.findFirst({
+      where: {
+        slug,
+      },
+      include: {
+        author: true,
+      },
+    });
 
-  if (!response.ok) {
-    logger.error(`${formatDate} - Ops, alguma coisa deu errado :(`);
-    return {};
+    const processedContent = await remark().use(html).process(post.markdown);
+    const contentHtml = processedContent.toString();
+
+    post.markdown = contentHtml;
+
+    return post;
+  } catch (error) {
+    logger.error(`Falha ao obter post com o slug "${slug}". Erro: ${error}`);
   }
 
-  logger.info(`${formatDate} - Post ${slug} obtido com sucesso`);
-  const data = await response.json();
-  if (!data.length === 0) {
-    return {}
-  }
-
-  const post = data[0]
-
-  const processedContent = await remark()
-    .use(html)
-    .process(post.markdown);
-  const contentHtml = processedContent.toString();
-
-  post.markdown = contentHtml;
-
-  return post;
+  redirect("/not-found");
 }
 
 export default async function PagePost({ params }) {
@@ -44,22 +42,19 @@ export default async function PagePost({ params }) {
           </figure>
         </header>
         <section className={styles.postSection}>
-          <h1 className={styles.postTitle}>
-            {post.title}
-          </h1>
-          <p className={styles.postContent}>
-            {post.body}
-          </p>
+          <h1 className={styles.postTitle}>{post.title}</h1>
+          <p className={styles.postContent}>{post.body}</p>
           <footer className={styles.postFooter}>
             <Avatar imageSrc={post.author.avatar} name={post.author.name} />
           </footer>
         </section>
       </article>
-      <h1 className={styles.postTitle__code}>
-        Código:
-      </h1>
+      <h1 className={styles.postTitle__code}>Código:</h1>
       <section className={styles.postCodeSection}>
-        <div dangerouslySetInnerHTML={{ __html: post.markdown }} className={styles.postCode} />
+        <div
+          dangerouslySetInnerHTML={{ __html: post.markdown }}
+          className={styles.postCode}
+        />
       </section>
     </div>
   );
