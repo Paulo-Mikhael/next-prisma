@@ -2,28 +2,30 @@ import { CardPost } from "@/components/CardPost";
 import styles from "./page.module.scss";
 import logger from "@/logger";
 import Link from "next/link";
+import db from "../../prisma/db";
 
 async function getAllPosts(page) {
-  const response = await fetch(`http://localhost:3042/posts?_page=${page}&_per_page=6`)
-  const date = new Date()
-  const formatDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+  try {
+    const posts = await db.post.findMany({
+      include: {
+        author: true,
+      },
+    });
 
-  if (!response.ok) {
-    logger.error(`${formatDate} - Ops, alguma coisa deu errado :(`);
-    return [];
+    return { data: posts, prev: null, next: null };
+  } catch (error) {
+    logger.error(error);
+    return { data: [], prev: null, next: null };
   }
-
-  logger.info(`${formatDate} - Posts obtidos com sucesso`);
-  return response.json()
 }
 
 export default async function Home({ searchParams }) {
-  const currentPage = searchParams?.page || 1
-  const { data: posts, prev, next } = await getAllPosts(currentPage)
+  const currentPage = searchParams?.page || 1;
+  const { data: posts, prev, next } = await getAllPosts(currentPage);
 
   return (
     <main className={styles.postsContainer}>
-      {posts.map(post => (
+      {posts.map((post) => (
         <CardPost key={post.id} post={post} />
       ))}
       <div className={styles.paginationContainer}>

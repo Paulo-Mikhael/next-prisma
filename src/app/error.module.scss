@@ -1,0 +1,34 @@
+.errorContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & .errorMessage {
+    font-size: 37px;
+    font-weight: 500;
+    margin: 50px 0px 16px 0px;
+    color: #81FE88;
+  }
+  & .errorSubMessage {
+    font-size: 26px;
+    font-weight: 400;
+    color: #BCBCBC;
+  }
+  & .errorLinkContainer {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    & .errorLink {
+      font-size: 18px;
+      font-weight: 400;
+      color: #BCBCBC;
+      
+      &:hover {
+        color: #BFFFC3;
+      }
+    }
+  }
+}

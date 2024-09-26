@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./cardpost.module.scss";
 import { Avatar } from "../Avatar";
 
@@ -8,16 +7,18 @@ export const CardPost = ({ post }) => {
     <article className={styles.post}>
       <header className={styles.postHeader}>
         <figure>
-          <Image className={styles.postImage} width={438} height={183} src={post.cover} alt={`Capa do post de título: ${post.title}`} />
+          <Image
+            className={styles.postImage}
+            width={438}
+            height={183}
+            src={post.cover}
+            alt={`Capa do post de título: ${post.title}`}
+          />
         </figure>
       </header>
       <section className={styles.postBody}>
-        <h2>
-          {post.title}
-        </h2>
-        <p>
-          {post.body}
-        </p>
+        <h2>{post.title}</h2>
+        <p>{post.body}</p>
         <a href={`/posts/${post.slug}`} className={styles.link}>
           Ver detalhes
         </a>
@@ -27,4 +28,4 @@ export const CardPost = ({ post }) => {
       </footer>
     </article>
   );
-}
+};
