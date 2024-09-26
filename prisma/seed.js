@@ -15,6 +15,7 @@ async function main() {
     update: {},
     create: author,
   });
+
   const posts = [
     {
       cover:
@@ -138,13 +139,13 @@ async function main() {
     },
   ];
 
-  posts.forEach(async (post) => {
+  for (let i = 0; i < posts.length; i++) {
     await prisma.post.upsert({
-      where: { slug: post.slug },
+      where: { slug: posts[i].slug },
       update: {},
-      create: post,
+      create: posts[i],
     });
-  });
+  }
 }
 main()
   .then(async () => {
